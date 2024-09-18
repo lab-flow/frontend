@@ -68,15 +68,9 @@ function NavBar() {
               {currentUserData?.username}
             </NavTypography>
           </Link>
-          <Link
-            key="logout"
-            to="/"
-            onClick={() => {
+          <NavTypography onClick={() => {
               handleLogout();
-            }}
-          >
-            <NavTypography>{Names.logout}</NavTypography>
-          </Link>
+            }}>{Names.logout}</NavTypography>
         </>
       );
     } else {
