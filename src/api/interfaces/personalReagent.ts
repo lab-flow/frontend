@@ -45,7 +45,10 @@ export interface PersonalReagentInterface {
   receipt_purchase_date: string;
   expiration_date: string;
   disposal_utilization_date: string;
-  laboratory: string;
+  laboratory: {
+    id: number;
+    repr: string;
+  };
   room: string;
   detailed_location: string;
   is_usage_record_generated: boolean;

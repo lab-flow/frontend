@@ -63,6 +63,9 @@ import Pictograms from "../views/pictograms/Pictograms";
 import Concentrations from "../views/concentrations/Concentrations";
 import ProjectProcedures from "../views/project-procedures/ProjectProcedures";
 import AddPictograms from "../views/pictograms/AddPictograms";
+import AddLaboratory from "../views/laboratory/AddLaboratory.tsx";
+import Laboratories from "../views/laboratory/Laboratories.tsx";
+import EditLaboratory from "../views/laboratory/EditLaboratory.tsx";
 
 function Routing() {
   return (
@@ -315,6 +318,30 @@ function Routing() {
                 component={() => HazardStatements({ history: true })}
                 roles={[ADMIN_ROLE]}
               />
+            }
+          />
+          <Route
+            path={`${DataProviders.LABORATORIES.endpoint}/new`}
+            element={
+              <PrivateRoute
+                component={AddLaboratory}
+                roles={[ADMIN_ROLE]}
+              />
+            }
+          />
+          <Route
+            path={`${DataProviders.LABORATORIES.endpoint}/history`}
+            element={
+              <PrivateRoute
+                component={() => Laboratories({ history: true })}
+                roles={[ADMIN_ROLE]}
+              />
+            }
+          />
+          <Route
+            path={`${DataProviders.LABORATORIES.endpoint}/:id/edit`}
+            element={
+              <PrivateRoute component={EditLaboratory} roles={[ADMIN_ROLE]} />
             }
           />
           <Route

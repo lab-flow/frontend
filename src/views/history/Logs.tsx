@@ -23,6 +23,7 @@ import ClpClassifications from "../clp-classifications/ClpClassifications";
 import Pictograms from "../pictograms/Pictograms";
 import Concentrations from "../concentrations/Concentrations";
 import ProjectProcedures from "../project-procedures/ProjectProcedures";
+import Laboratories from "../laboratory/Laboratories";
 
 function Logs() {
   const [expanded, setExpanded] = useState<string>();
@@ -53,6 +54,7 @@ function Logs() {
     pictograms: Pictograms({ history: true, logsPage: true }),
     concentrations: Concentrations({ history: true, logsPage: true }),
     project_procedures: ProjectProcedures({ history: true, logsPage: true }),
+    laboratories: Laboratories({ history: true, logsPage: true }),
   };
 
   const content = (

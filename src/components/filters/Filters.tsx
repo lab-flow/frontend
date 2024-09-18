@@ -4,7 +4,6 @@ import { Controller } from "react-hook-form";
 import Dropdown from "../basic/Dropdown";
 import { Names } from "../../api/common/dataNames";
 import { DataProviders } from "../../api/dataProviders/DataProvider.ts";
-import { getLaboratoryName, Laboratory } from "../../api/enums/laboratory";
 import { Autocomplete, Card, Chip, TextField, Typography } from "@mui/material";
 import CustomDatePicker from "../basic/CustomDatePicker";
 
@@ -104,40 +103,19 @@ export function ReagentFilter(props: FilterProps) {
   );
 }
 
+
 export function LaboratoryFilterBase(props: FilterProps) {
-  const defaultValue = props.defaultValue || props.multiple ? [] : "";
-  const [selectedValue, setSelectedValue] = useState(defaultValue);
-
-  const getItemsWithDefault = () => {
-    const defaultItem = {
-      name: props.defaultEmptyName || "",
-      value: props.defaultEmptyValue,
-    };
-    const laboratories = Object.keys(Laboratory).map((key) => ({
-      name: getLaboratoryName(Laboratory[key as keyof typeof Laboratory]),
-      value: Laboratory[key as keyof typeof Laboratory]?.toString(),
-    }));
-    return props.disableDefault ? laboratories : [defaultItem, ...laboratories];
-  };
-
   return (
-    <Controller
-      control={props.control}
+    <BaseFilter
+      {...props.control}
       name="laboratory"
-      render={({ field }) => (
-        <Dropdown
-          label={Names.laboratory}
-          value={selectedValue}
-          onChange={(e) => {
-            setSelectedValue(e.target.value);
-            field.onChange(e);
-          }}
-          id="laboratory"
-          items={getItemsWithDefault()}
-          multiple={!!props.multiple}
-          required={!!props.required}
-        />
-      )}
+      displayName={Names.laboratory}
+      id="laboratory"
+      dataGetterQuery={() => DataProviders.LABORATORIES.getItemList(0, 0, true)}
+      queryKey="getLaboratories"
+      itemsNameMap={(item: { value: string }) => item.laboratory}
+      itemsValueMap={(item: { id: string }) => item.id}
+      {...props}
     />
   );
 }

@@ -30,6 +30,7 @@ export const Names = {
   is_usage_record_required: "Wymagana karta rozchodu",
   lab_roles: "Role",
   laboratory: "Laboratorium",
+  laboratories: "Laboratoria",
   last_name: "Nazwisko",
   location: "Lokalizacja",
   login: "Zaloguj",

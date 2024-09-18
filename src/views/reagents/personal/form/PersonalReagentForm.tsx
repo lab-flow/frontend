@@ -17,10 +17,6 @@ import { Names } from "../../../../api/common/dataNames.ts";
 import { useQuery } from "react-query";
 import ReagentGeneralInfo from "../../general/ReagentGeneralInfo";
 import { DataProviders } from "../../../../api/dataProviders/DataProvider.ts";
-import {
-  getLaboratoryName,
-  Laboratory,
-} from "../../../../api/enums/laboratory";
 import { authenticationService } from "../../../../services/authenticationService";
 import { ADMIN_ROLE } from "../../../../api/enums/userRoles";
 import NewItemButton from "../../../../components/basic/NewItemButton";
@@ -30,6 +26,7 @@ import { ReagentInterface } from "../../../../api/interfaces/reagent.ts";
 import { AxiosResponse } from "axios";
 import { ProjectProcedureInterface } from "../../../../api/interfaces/projectProcedure.ts";
 import { UserInterface } from "../../../../api/interfaces/user.ts";
+import { LaboratoryInterface } from "../../../../api/interfaces/laboratory.ts";
 
 const StyledForm = styled("form")(({ theme }) => ({
   "& *": {
@@ -67,7 +64,10 @@ function PersonalReagentForm(props: AddPersonalReagentFormProps) {
     );
     return ReagentGeneralInfo(currentReagentData, false);
   };
-
+  const { data: laboratoriesData } = useQuery(
+    "getLaboratoriesData",
+    () => DataProviders.LABORATORIES.getItemList(0, 0, true),
+  );
   const { data: projectProceduresData } = useQuery(
     "getProjectProceduresData",
     () => DataProviders.PROJECT_PROCEDURES.getItemList(0, 0, true),
@@ -85,11 +85,6 @@ function PersonalReagentForm(props: AddPersonalReagentFormProps) {
   const [mainOwner, setMainOwner] = useState(
     props.defaultValues?.main_owner?.toString(),
   );
-
-  const laboratories = Object.keys(Laboratory).map((key) => ({
-    name: getLaboratoryName(Laboratory[key as keyof typeof Laboratory]),
-    value: Laboratory[key as keyof typeof Laboratory]?.toString(),
-  }));
   const [laboratory, setLaboratory] = useState(props.defaultValues?.laboratory);
 
   const handleToggleChange = (
@@ -282,17 +277,18 @@ function PersonalReagentForm(props: AddPersonalReagentFormProps) {
           <Dropdown
             label={Names.laboratory}
             value={laboratory}
-            required
             onChange={(e) => {
               setLaboratory(e.target.value);
               field.onChange(e);
             }}
             id="laboratory"
             items={
-              laboratories?.map((item) => ({
-                name: item.name,
-                value: item.name,
-              })) || []
+              (laboratoriesData as AxiosResponse)?.data?.map(
+                (item: LaboratoryInterface) => ({
+                  name: `${item.id} - ${item.laboratory}`,
+                  value: item.id,
+                }),
+              ) || []
             }
           />
         )}

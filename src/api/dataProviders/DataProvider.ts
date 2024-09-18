@@ -117,6 +117,7 @@ export const DataProviders = {
   STORAGE_CONDITIONS: new DataProvider("storage-conditions"),
   PURITIES_QUALITIES: new DataProvider("purities-qualities"),
   PRECAUTIONARY_STATEMENT: new DataProvider("precautionary-statements"),
+  LABORATORIES: new DataProvider("laboratories"),
   CLP_CLASSIFICATIONS: new DataProvider("clp-classifications"),
   CLASSIFICATIONS: new DataProvider("classifications"),
   HAZARD_STATEMENTS: new DataProvider("hazard-statements"),

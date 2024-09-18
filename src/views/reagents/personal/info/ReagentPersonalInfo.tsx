@@ -57,7 +57,8 @@ function ReagentPersonalInfo(
         )}
       </Typography>
       <Typography variant="body2" gutterBottom component="div">
-        <b>{Names.laboratory}: </b> {reagent.laboratory || "-"}
+        <b>{Names.laboratory}: </b> {" "}
+        {reagent?.laboratory?.repr}
       </Typography>
       <Typography variant="body2" gutterBottom component="div">
         <b>{Names.lot_no}: </b> {reagent.lot_no || "-"}

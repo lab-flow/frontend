@@ -33,6 +33,7 @@ import {
 import { ADMIN_ROLE, ROLE } from "../../api/enums/userRoles";
 import ReagentRequestsMe from "../reagents/requests/ReagentRequestsMe";
 import ReagentsGrid from "../reagents/general/ReagentsGrid";
+import Laboratories from "../laboratory/Laboratories.tsx";
 
 function UserPanel() {
   const { currentUserRoles } = authenticationService;
@@ -157,6 +158,14 @@ function UserPanel() {
         icon: <TextIcon text="CLP" />,
         component: <ClpClassifications history={false} />,
         visible: true,
+      },
+      {
+        name: Names.laboratories,
+        id: DataProviders.LABORATORIES.endpoint,
+        icon: <TextIcon text="L" />,
+        component: <Laboratories history={false} />,
+        visible: true,
+        dividerBefore: true,
       },
     ];
   }, [currentUserRoles]);

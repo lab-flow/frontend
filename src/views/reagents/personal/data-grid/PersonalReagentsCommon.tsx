@@ -33,6 +33,7 @@ import { GridValidRowModel } from "@mui/x-data-grid/models/gridRows";
 import { AxiosResponse } from "axios";
 import { UserInterface } from "../../../../api/interfaces/user.ts";
 import { GetWithPaginationResponse } from "../../../../api/interfaces/getWithPaginationResponse.ts";
+import { LaboratoryInterface } from "../../../../api/interfaces/laboratory.ts";
 
 interface PersonalReagentsCommonProps {
   query_key: string;
@@ -502,7 +503,8 @@ function PersonalReagentsCommon(props: PersonalReagentsCommonProps) {
       field: "laboratory",
       headerName: Names.laboratory,
       width: 125,
-      renderCell: renderCellExpand,
+      renderCell: (params: { row: PersonalReagentInterface }) =>
+        params.row.laboratory?.repr,
       sortable: false,
     },
     {
