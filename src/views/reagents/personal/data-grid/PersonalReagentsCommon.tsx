@@ -660,7 +660,7 @@ function PersonalReagentsCommon(props: PersonalReagentsCommonProps) {
                 </Typography>
                 <Typography variant="h6">
                   <strong>{Names.laboratory}:</strong>{" "}
-                  {selectedReagent ? selectedReagent.laboratory : ""}
+                  {selectedReagent ? selectedReagent.laboratory.repr : ""}
                 </Typography>
                 <Typography variant="h6">
                   <strong>{Names.room}:</strong>{" "}
