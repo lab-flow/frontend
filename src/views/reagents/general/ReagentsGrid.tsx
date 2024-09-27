@@ -177,6 +177,13 @@ const ReagentsGrid = (props: { history: boolean; logsPage?: boolean }) => {
       sortable: false,
     },
     {
+      field: "unit",
+      headerName: Names.unit,
+      width: 125,
+      renderCell: (params: { row: ReagentInterface }) => params.row.unit?.repr,
+      sortable: false,
+    },
+    {
       field: "cas_no",
       headerName: Names.cas_no,
       width: 140,
@@ -188,13 +195,6 @@ const ReagentsGrid = (props: { history: boolean; logsPage?: boolean }) => {
       headerName: Names.other_info,
       width: 140,
       align: "left",
-      sortable: false,
-    },
-    {
-      field: "unit",
-      headerName: Names.unit,
-      width: 125,
-      renderCell: (params: { row: ReagentInterface }) => params.row.unit?.repr,
       sortable: false,
     },
     {
