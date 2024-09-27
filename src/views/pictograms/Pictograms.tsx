@@ -74,6 +74,21 @@ function Pictograms(props: { history: boolean; logsPage?: boolean }) {
           sortable: true,
         }
       : { field: "pk", headerName: Names.object_id, width: 100 },
+      ...(!props.history
+        ? [
+            {
+              field: "actions",
+              headerName: Names.actions,
+              width: 55,
+              sortable: false,
+              renderCell: (params: { row: PictogramsInterface }) => (
+                <>
+                  <CustomMenu items={actions({ row: params.row })} />
+                </>
+              ),
+            },
+          ]
+        : []),
     {
       field: "pictogram",
       headerName: Names.pictogram,
@@ -91,22 +106,7 @@ function Pictograms(props: { history: boolean; logsPage?: boolean }) {
             }}
           />
         ) : null,
-    },
-    ...(!props.history
-      ? [
-          {
-            field: "actions",
-            headerName: Names.actions,
-            width: 55,
-            sortable: false,
-            renderCell: (params: { row: PictogramsInterface }) => (
-              <>
-                <CustomMenu items={actions({ row: params.row })} />
-              </>
-            ),
-          },
-        ]
-      : []),
+    }
   ].filter((item) => item);
 
   return DashboardCard({

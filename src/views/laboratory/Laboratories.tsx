@@ -75,6 +75,21 @@ function Laboratories(props: {
           sortable: true,
         }
       : { field: "pk", headerName: Names.object_id, width: 100 },
+      ...(!props.history
+        ? [
+            {
+              field: "actions",
+              headerName: Names.actions,
+              width: 55,
+              sortable: false,
+              renderCell: (params: { row: LaboratoryInterface }) => (
+                <>
+                  <CustomMenu items={actions({ row: params.row })} />
+                </>
+              ),
+            },
+          ]
+        : []),
     {
       field: "laboratory",
       headerName: Names.laboratory,
@@ -82,21 +97,6 @@ function Laboratories(props: {
       renderCell: renderCellExpand,
       sortable: true,
     },
-    ...(!props.history
-      ? [
-          {
-            field: "actions",
-            headerName: Names.actions,
-            width: 55,
-            sortable: false,
-            renderCell: (params: { row: LaboratoryInterface }) => (
-              <>
-                <CustomMenu items={actions({ row: params.row })} />
-              </>
-            ),
-          },
-        ]
-      : []),
   ].filter((item) => item);
 
   return DashboardCard({

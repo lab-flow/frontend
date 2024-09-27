@@ -95,6 +95,21 @@ function PuritiesQualities(props: { history: boolean; logsPage?: boolean }) {
           sortable: true,
         }
       : { field: "pk", headerName: Names.object_id, width: 100 },
+      ...(!props.history
+        ? [
+            {
+              field: "actions",
+              headerName: Names.actions,
+              width: 55,
+              sortable: false,
+              renderCell: (params: { row: PurityQualityInterface }) => (
+                <>
+                  <CustomMenu items={actions({ row: params.row })} />
+                </>
+              ),
+            },
+          ]
+        : []),
     {
       field: "purity_quality",
       headerName: Names.purities_qualities,
@@ -102,21 +117,6 @@ function PuritiesQualities(props: { history: boolean; logsPage?: boolean }) {
       renderCell: renderCellExpand,
       sortable: true,
     },
-    ...(!props.history
-      ? [
-          {
-            field: "actions",
-            headerName: Names.actions,
-            width: 55,
-            sortable: false,
-            renderCell: (params: { row: PurityQualityInterface }) => (
-              <>
-                <CustomMenu items={actions({ row: params.row })} />
-              </>
-            ),
-          },
-        ]
-      : []),
   ].filter((item) => item);
 
   return DashboardCard({

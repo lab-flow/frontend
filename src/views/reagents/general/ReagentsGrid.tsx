@@ -103,6 +103,21 @@ const ReagentsGrid = (props: { history: boolean; logsPage?: boolean }) => {
           sortable: true,
         }
       : { field: "pk", headerName: Names.object_id, width: 100 },
+      ...(!props.history
+        ? [
+            {
+              field: "actions",
+              headerName: Names.actions,
+              sortable: false,
+              width: 55,
+              renderCell: (params: { row: ReagentInterface }) => (
+                <>
+                  <CustomMenu items={actions({ row: params.row })} />
+                </>
+              ),
+            },
+          ]
+        : []),
     {
       field: "name",
       headerName: Names.name,
@@ -302,21 +317,6 @@ const ReagentsGrid = (props: { history: boolean; logsPage?: boolean }) => {
       align: "left",
       sortable: false,
     },
-    ...(!props.history
-      ? [
-          {
-            field: "actions",
-            headerName: Names.actions,
-            sortable: false,
-            width: 55,
-            renderCell: (params: { row: ReagentInterface }) => (
-              <>
-                <CustomMenu items={actions({ row: params.row })} />
-              </>
-            ),
-          },
-        ]
-      : []),
   ];
 
   return DashboardCard({

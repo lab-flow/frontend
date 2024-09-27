@@ -284,6 +284,21 @@ function PersonalReagentsCommon(props: PersonalReagentsCommonProps) {
     );
 
   const columns: GridValidRowModel[] = [
+    ...(!props.history
+      ? [
+          {
+            field: "actions",
+            headerName: Names.actions,
+            width: 55,
+            sortable: false,
+            renderCell: (params: { row: PersonalReagentInterface }) => (
+              <>
+                <CustomMenu items={actions({ row: params.row })} />
+              </>
+            ),
+          },
+        ]
+      : []),
     {
       field: "reagent",
       headerName: Names.reagent,
@@ -528,21 +543,6 @@ function PersonalReagentsCommon(props: PersonalReagentsCommonProps) {
       renderCell: renderCellExpand,
       sortable: false,
     },
-    ...(!props.history
-      ? [
-          {
-            field: "actions",
-            headerName: Names.actions,
-            width: 55,
-            sortable: false,
-            renderCell: (params: { row: PersonalReagentInterface }) => (
-              <>
-                <CustomMenu items={actions({ row: params.row })} />
-              </>
-            ),
-          },
-        ]
-      : []),
   ].filter((item) => item);
   const exportButton = (
     <DownloadPdfButton

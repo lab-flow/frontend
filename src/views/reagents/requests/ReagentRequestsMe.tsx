@@ -42,6 +42,17 @@ function ReagentRequestsMe() {
   const columns: GridValidRowModel[] = [
     { field: "id", headerName: "ID", width: 70, sortable: true },
     {
+      field: "actions",
+      headerName: Names.actions,
+      width: 55,
+      sortable: false,
+      renderCell: (params: { row: { id: number } }) => (
+        <>
+          <CustomMenu items={actions({ row: params.row })} />
+        </>
+      ),
+    },
+    {
       field: "change_status_date",
       headerName: Names.change_status_date,
       width: 260,
@@ -83,17 +94,6 @@ function ReagentRequestsMe() {
       renderCell: (params: { row: { status: string } }) =>
         getReagentRequestStatusName(params.row.status),
       sortable: false,
-    },
-    {
-      field: "actions",
-      headerName: Names.actions,
-      width: 55,
-      sortable: false,
-      renderCell: (params: { row: { id: number } }) => (
-        <>
-          <CustomMenu items={actions({ row: params.row })} />
-        </>
-      ),
     },
   ];
   const [statusFilter, setStatusFilter] = useState<string>(

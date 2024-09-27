@@ -73,6 +73,21 @@ function ClpClassifications(props: { history: boolean; logsPage?: boolean }) {
           sortable: true,
         }
       : { field: "pk", headerName: Names.object_id, width: 100 },
+      ...(!props.history
+        ? [
+            {
+              field: "actions",
+              headerName: Names.actions,
+              width: 55,
+              sortable: false,
+              renderCell: (params: { row: ClpClassificationInterface }) => (
+                <>
+                  <CustomMenu items={actions({ row: params.row })} />
+                </>
+              ),
+            },
+          ]
+        : []),
     {
       field: "classification",
       headerName: Names.classification,
@@ -97,21 +112,6 @@ function ClpClassifications(props: { history: boolean; logsPage?: boolean }) {
           ? getHazardGroupName(params.row.hazard_group)
           : null,
     },
-    ...(!props.history
-      ? [
-          {
-            field: "actions",
-            headerName: Names.actions,
-            width: 55,
-            sortable: false,
-            renderCell: (params: { row: ClpClassificationInterface }) => (
-              <>
-                <CustomMenu items={actions({ row: params.row })} />
-              </>
-            ),
-          },
-        ]
-      : []),
   ];
 
   return DashboardCard({

@@ -86,6 +86,21 @@ function Units(props: { history: boolean; logsPage?: boolean }) {
           sortable: true,
         }
       : { field: "pk", headerName: Names.object_id, width: 100 },
+      ...(!props.history
+        ? [
+            {
+              field: "actions",
+              headerName: Names.actions,
+              width: 55,
+              sortable: false,
+              renderCell: (params: { row: UnitInterface }) => (
+                <>
+                  <CustomMenu items={actions({ row: params.row })} />
+                </>
+              ),
+            },
+          ]
+        : []),
     {
       field: "unit",
       headerName: Names.unit,
@@ -93,21 +108,6 @@ function Units(props: { history: boolean; logsPage?: boolean }) {
       renderCell: renderCellExpand,
       sortable: true,
     },
-    ...(!props.history
-      ? [
-          {
-            field: "actions",
-            headerName: Names.actions,
-            width: 55,
-            sortable: false,
-            renderCell: (params: { row: UnitInterface }) => (
-              <>
-                <CustomMenu items={actions({ row: params.row })} />
-              </>
-            ),
-          },
-        ]
-      : []),
   ].filter((item) => item);
 
   return DashboardCard({
