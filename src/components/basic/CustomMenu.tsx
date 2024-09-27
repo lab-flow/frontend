@@ -1,5 +1,5 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -20,15 +20,12 @@ export default function CustomMenu(props: CustomMenuProps) {
 
   return props.items?.length > 0 ? (
     <div>
-      <Button
+      <IconButton
         id="basic-button"
-        aria-controls={open ? "basic-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
         <MoreVertIcon />
-      </Button>
+      </IconButton>
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
