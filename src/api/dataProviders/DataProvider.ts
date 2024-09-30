@@ -175,6 +175,10 @@ export const getDataProviderByName = (name: string) => {
       return DataProviders.PURITIES_QUALITIES;
     case "StorageCondition":
       return DataProviders.STORAGE_CONDITIONS;
+    case "SafetyDataSheet":
+        return DataProviders.SAFETY_DATA_SHEETS;
+    case "SafetyInstruction":
+        return DataProviders.SAFETY_INSTRUCTIONS;
     default:
       return null;
   }
