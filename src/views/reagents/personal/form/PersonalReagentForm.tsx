@@ -264,6 +264,19 @@ function PersonalReagentForm(props: AddPersonalReagentFormProps) {
         />
         <Controller
           control={control}
+          name="opening_date"
+          render={({ field }) => (
+            <div>
+              <CustomDatePicker
+                label={Names.opening_date}
+                required
+                {...field}
+              />
+            </div>
+          )}
+        />
+        <Controller
+          control={control}
           name="expiration_date"
           render={({ field }) => (
             <CustomDatePicker label="Data ważności" required {...field} />

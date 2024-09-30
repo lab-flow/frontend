@@ -501,6 +501,13 @@ function PersonalReagentsCommon(props: PersonalReagentsCommonProps) {
       sortable: true,
     },
     {
+      field: "opening_date",
+      headerName: Names.opening_date,
+      width: 125,
+      renderCell: renderCellExpand,
+      sortable: true,
+    },
+    {
       field: "expiration_date",
       headerName: Names.expiration_date,
       width: 125,

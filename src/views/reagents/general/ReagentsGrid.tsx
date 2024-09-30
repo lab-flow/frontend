@@ -270,7 +270,7 @@ const ReagentsGrid = (props: { history: boolean; logsPage?: boolean }) => {
               "_blank",
             );
           }}>
-            <VisibilityIcon style={{ color: theme.palette.info.main }} />
+            <VisibilityIcon style={{ color: theme.palette.info.main, marginLeft: "10px" }} />
           </Tooltip>    
         </>
       ),
@@ -293,7 +293,7 @@ const ReagentsGrid = (props: { history: boolean; logsPage?: boolean }) => {
             "_blank",
           );
         }}>
-          <VisibilityIcon style={{ color: theme.palette.info.main }} />
+          <VisibilityIcon style={{ color: theme.palette.info.main, marginLeft: "10px"  }} />
         </Tooltip>
         </>
       ),
