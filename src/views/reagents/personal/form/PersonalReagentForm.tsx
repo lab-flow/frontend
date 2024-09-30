@@ -157,7 +157,7 @@ function PersonalReagentForm(props: AddPersonalReagentFormProps) {
             />
           )}
         />
-        <NewItemButton href={`/${DataProviders.REAGENTS.endpoint}/new`} />
+        <NewItemButton href={`/${DataProviders.REAGENTS.endpoint}/new`} margin="-15px 5px"/>
       </Box>
       {reagent && reagentView(reagent as unknown as number)}
     </>
@@ -269,7 +269,6 @@ function PersonalReagentForm(props: AddPersonalReagentFormProps) {
             <div>
               <CustomDatePicker
                 label={Names.opening_date}
-                required
                 {...field}
               />
             </div>
