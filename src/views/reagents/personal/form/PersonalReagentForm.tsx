@@ -289,6 +289,7 @@ function PersonalReagentForm(props: AddPersonalReagentFormProps) {
           <Dropdown
             label={Names.laboratory}
             value={laboratory}
+            required
             onChange={(e) => {
               setLaboratory(e.target.value);
               field.onChange(e);

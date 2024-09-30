@@ -45,11 +45,12 @@ import AddSafetyInstruction from "../../safety-instruction/AddSafetyInstruction.
 interface ReagentFormProps {
   onSubmit: SubmitHandler<ReagentFormInterface>;
   defaultValues?: ReagentFormInterface;
+  setOpen?: (value: boolean) => void;
   edit?: boolean;
 }
 
 function ReagentForm(props: ReagentFormProps) {
-  const { control, register, handleSubmit } = useForm<ReagentFormInterface>({
+  const { control, handleSubmit } = useForm<ReagentFormInterface>({
     defaultValues: { ...props.defaultValues },
   });
   const { currentUserRoles } = authenticationService;
@@ -338,6 +339,7 @@ function ReagentForm(props: ReagentFormProps) {
           name="storage_conditions"
           render={({ field }) => (
             <Dropdown
+              required
               label={Names.storage_conditions}
               value={storageCondition}
               onChange={(e) => {
@@ -454,6 +456,7 @@ function ReagentForm(props: ReagentFormProps) {
           name="safety_data_sheet"
           render={({ field }) => (
             <Dropdown
+            required
               label={Names.safety_data_sheet}
               value={safetyDataSheet}
               onChange={(e) => {
@@ -475,9 +478,7 @@ function ReagentForm(props: ReagentFormProps) {
             />
           )}
         />
-        <PrivateComponent
-          roles={ANY_ROLE_LIST}
-          component={() => (
+
             <NewItemPopup
               formComponent={(setOpen) => (
                 <AddSafetyDataSheet
@@ -486,8 +487,7 @@ function ReagentForm(props: ReagentFormProps) {
                 />
               )}
             />
-          )}
-        />
+
       </Box>
 
       <Box sx={{ display: "flex" }}>
@@ -496,6 +496,7 @@ function ReagentForm(props: ReagentFormProps) {
           name="safety_instruction"
           render={({ field }) => (
             <Dropdown
+              required
               label={Names.safety_instruction}
               value={safetyInstruction}
               onChange={(e) => {
@@ -517,9 +518,6 @@ function ReagentForm(props: ReagentFormProps) {
             />
           )}
         />
-        <PrivateComponent
-          roles={ANY_ROLE_LIST}
-          component={() => (
             <NewItemPopup
               formComponent={(setOpen) => (
                 <AddSafetyInstruction
@@ -528,8 +526,6 @@ function ReagentForm(props: ReagentFormProps) {
                 />
               )}
             />
-          )}
-        />
       </Box>
 
       <Controller

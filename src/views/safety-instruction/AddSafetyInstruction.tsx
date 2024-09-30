@@ -23,8 +23,8 @@ function AddSafetyInstruction({
       onSuccess: (data) => {
         addAlert(Names.added_new_object_id + data?.data?.id, "success");
         if (setOpen) {
-          refetch();
           setOpen(false);
+          refetch();
         } else navigate(`/user-panel/${DataProviders.SAFETY_INSTRUCTIONS.endpoint}`);
       },
     },

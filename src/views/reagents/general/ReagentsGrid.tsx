@@ -266,7 +266,7 @@ const ReagentsGrid = (props: { history: boolean; logsPage?: boolean }) => {
         <Tooltip title={`${Names.safety_data_sheet} - ${Names.preview}`}
           onClick={async () => {
             window.open(
-              (await getSafetyDataSheet(params.row.id)).safety_data_sheet,
+              (await getSafetyDataSheet(params.row.safety_data_sheet?.id)).safety_data_sheet,
               "_blank",
             );
           }}>
@@ -288,7 +288,7 @@ const ReagentsGrid = (props: { history: boolean; logsPage?: boolean }) => {
         onClick={async () => {
           window.open(
             (await getSafetyInstruction
-              (params.row.id)).safety_instruction
+              (params.row.safety_instruction?.id)).safety_instruction
               ,
             "_blank",
           );
