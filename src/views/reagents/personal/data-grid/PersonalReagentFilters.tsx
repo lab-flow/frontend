@@ -36,6 +36,7 @@ interface PersonalReagentsFilterProps {
     is_critical: boolean;
     user: boolean;
     expiration_date: boolean;
+    opening_date: boolean;
     receipt_purchase_date: boolean;
     reagent: boolean;
     producer: boolean;
@@ -126,6 +127,16 @@ function PersonalReagentsFilter(props: PersonalReagentsFilterProps) {
                     disableDefault
                     setValue={props.setValue}
                     field_name={"expiration_date"}
+                  />
+                </Grid>
+              )}
+              {props.filters?.opening_date && (
+                <Grid item xs={12} sm={6} md={6} xl={2}>
+                  <DateFilter
+                    control={props.control}
+                    disableDefault
+                    setValue={props.setValue}
+                    field_name={"opening_date"}
                   />
                 </Grid>
               )}
