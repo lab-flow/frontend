@@ -66,6 +66,12 @@ import AddPictograms from "../views/pictograms/AddPictograms";
 import AddLaboratory from "../views/laboratory/AddLaboratory.tsx";
 import Laboratories from "../views/laboratory/Laboratories.tsx";
 import EditLaboratory from "../views/laboratory/EditLaboratory.tsx";
+import AddSafetyDataSheet from "../views/safety-data-sheet/AddSafetyDataSheet.tsx";
+import SafetyDataSheets from "../views/safety-data-sheet/SafetyDataSheets.tsx";
+import EditSafetyDataSheet from "../views/safety-data-sheet/EditSafetyDataSheet.tsx";
+import AddSafetyInstruction from "../views/safety-instruction/AddSafetyInstruction.tsx";
+import SafetyInstruction from "../views/safety-instruction/SafetyInstruction.tsx";
+import EditSafetyInstruction from "../views/safety-instruction/EditSafetyInstruction.tsx";
 
 function Routing() {
   return (
@@ -203,6 +209,58 @@ function Routing() {
               />
             }
           />
+
+          <Route
+            path={`${DataProviders.SAFETY_DATA_SHEETS.endpoint}/new`}
+            element={
+              <PrivateRoute component={AddSafetyDataSheet} roles={ANY_ROLE_LIST} />
+            }
+          />
+          <Route
+            path={`${DataProviders.SAFETY_DATA_SHEETS.endpoint}/history`}
+            element={
+              <PrivateRoute
+                component={() => SafetyDataSheets({ history: true })}
+                roles={[ADMIN_ROLE]}
+              />
+            }
+          />
+          <Route
+            path={`${DataProviders.SAFETY_DATA_SHEETS.endpoint}/:id/edit`}
+            element={
+              <PrivateRoute
+                component={EditSafetyDataSheet}
+                roles={[ADMIN_ROLE, ROLE.PROCEDURE_MANAGER, ROLE.LAB_MANAGER]}
+              />
+            }
+          />
+
+          <Route
+            path={`${DataProviders.SAFETY_INSTRUCTIONS.endpoint}/new`}
+            element={
+              <PrivateRoute component={AddSafetyInstruction} roles={ANY_ROLE_LIST} />
+            }
+          />
+          <Route
+            path={`${DataProviders.SAFETY_INSTRUCTIONS.endpoint}/history`}
+            element={
+              <PrivateRoute
+                component={() => SafetyInstruction({ history: true })}
+                roles={[ADMIN_ROLE]}
+              />
+            }
+          />
+          <Route
+            path={`${DataProviders.SAFETY_INSTRUCTIONS.endpoint}/:id/edit`}
+            element={
+              <PrivateRoute
+                component={EditSafetyInstruction}
+                roles={[ADMIN_ROLE, ROLE.PROCEDURE_MANAGER, ROLE.LAB_MANAGER]}
+              />
+            }
+          />
+
+
           <Route
             path={`${DataProviders.USERS.endpoint}/new`}
             element={<PrivateRoute component={AddUser} roles={[ADMIN_ROLE]} />}

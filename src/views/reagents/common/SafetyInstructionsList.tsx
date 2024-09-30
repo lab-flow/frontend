@@ -66,7 +66,7 @@ function SafetyInstructionsList() {
                       <Typography variant="h6">
                         <b>{el.reagent_name}</b>
                       </Typography>
-                      <Typography variant="h6">{el.producer}</Typography>
+                      <Typography variant="h6">{el.name}</Typography>
                     </Stack>
                   </CardContent>
                 </Box>

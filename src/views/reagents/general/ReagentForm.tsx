@@ -12,7 +12,7 @@ import Dropdown from "../../../components/basic/Dropdown.tsx";
 import { useState } from "react";
 import { Names } from "../../../api/common/dataNames.ts";
 import { authenticationService } from "../../../services/authenticationService";
-import { ADMIN_ROLE } from "../../../api/enums/userRoles";
+import { ADMIN_ROLE, ANY_ROLE_LIST } from "../../../api/enums/userRoles";
 import { DataProviders } from "../../../api/dataProviders/DataProvider.ts";
 import { StyledForm } from "../../../components/basic/StyledForm.tsx";
 import NewItemPopup from "../../../components/basic/NewItemPopup";
@@ -37,6 +37,10 @@ import { PurityQualityInterface } from "../../../api/interfaces/purityQuality.ts
 import { StorageConditionInterface } from "../../../api/interfaces/storageCondition.ts";
 import { HazardStatementsInterface } from "../../../api/interfaces/hazardStatements.ts";
 import { PrecautionaryStatementInterface } from "../../../api/interfaces/precautionaryStatement.ts";
+import { SafetyDataSheetInterface } from "../../../api/interfaces/safety_data_sheet.ts";
+import AddSafetyDataSheet from "../../safety-data-sheet/AddSafetyDataSheet.tsx";
+import { SafetyInstructionInterface } from "../../../api/interfaces/safety_instruction.ts";
+import AddSafetyInstruction from "../../safety-instruction/AddSafetyInstruction.tsx";
 
 interface ReagentFormProps {
   onSubmit: SubmitHandler<ReagentFormInterface>;
@@ -111,6 +115,23 @@ function ReagentForm(props: ReagentFormProps) {
   const [precautionaryStatement, setPrecautionaryStatement] = useState(
     (props.defaultValues?.precautionary_statements as unknown as string[]) ||
       [],
+  );
+
+  const { data: safetyDataSheetData, refetch: safetyDataSheetRefetch } =
+    useQuery("getSafetyDataSheetData", () =>
+      DataProviders.SAFETY_DATA_SHEETS.getItemList(0, 0, true),
+    );
+  const [safetyDataSheet, setSafetyDataSheet] = useState(
+    (props.defaultValues?.safety_data_sheet as unknown as string[]) || [],
+  );
+
+
+  const { data: safetyInstructionData, refetch: safetyInstructionRefetch } =
+    useQuery("getSafetyInstructionsData", () =>
+      DataProviders.SAFETY_INSTRUCTIONS.getItemList(0, 0, true),
+    );
+  const [safetyInstruction, setSafetyInstruction] = useState(
+    (props.defaultValues?.safety_instruction as unknown as string[]) || [],
   );
 
   return (
@@ -426,48 +447,91 @@ function ReagentForm(props: ReagentFormProps) {
           )}
         />
       </Box>
-      <Typography>{Names.safety_data_sheet}</Typography>
-      <Controller
-        control={control}
-        name="safety_data_sheet_name"
-        render={({ field }) => (
-          <TextField
-            sx={{ width: "100%" }}
-            label={Names.safety_data_sheet_name}
-            {...field}
-          />
-        )}
-      />
-      <input
-        {...register("safety_data_sheet")}
-        accept=".pdf"
-        multiple={false}
-        type="file"
-        name="safety_data_sheet"
-        required={!props.edit}
-      />
 
-      <Typography>{Names.safety_instruction}</Typography>
-      <Controller
-        control={control}
-        name="safety_instruction_name"
-        render={({ field }) => (
-          <TextField
-            sx={{ width: "100%" }}
-            label={Names.safety_instruction_name}
-            required
-            {...field}
-          />
-        )}
-      />
-      <input
-        {...register("safety_instruction")}
-        accept=".pdf"
-        multiple={false}
-        type="file"
-        name="safety_instruction"
-        required={!props.edit}
-      />
+      <Box sx={{ display: "flex" }}>
+        <Controller
+          control={control}
+          name="safety_data_sheet"
+          render={({ field }) => (
+            <Dropdown
+              label={Names.safety_data_sheet}
+              value={safetyDataSheet}
+              onChange={(e) => {
+                setSafetyDataSheet(
+                  e.target.value as unknown as string[],
+                );
+                field.onChange(e);
+              }}
+              id="safety_data_sheet"
+              items={
+                (safetyDataSheetData as AxiosResponse)?.data?.map(
+                  (item: SafetyDataSheetInterface) => ({
+                    name: item.reagent_name + " - " + item.name,
+                    shortName: item.name,
+                    value: item.id,
+                  }),
+                ) || []
+              }
+            />
+          )}
+        />
+        <PrivateComponent
+          roles={ANY_ROLE_LIST}
+          component={() => (
+            <NewItemPopup
+              formComponent={(setOpen) => (
+                <AddSafetyDataSheet
+                  setOpen={setOpen}
+                  refetch={safetyDataSheetRefetch}
+                />
+              )}
+            />
+          )}
+        />
+      </Box>
+
+      <Box sx={{ display: "flex" }}>
+        <Controller
+          control={control}
+          name="safety_instruction"
+          render={({ field }) => (
+            <Dropdown
+              label={Names.safety_instruction}
+              value={safetyInstruction}
+              onChange={(e) => {
+                setSafetyInstruction(
+                  e.target.value as unknown as string[],
+                );
+                field.onChange(e);
+              }}
+              id="safety_instruction"
+              items={
+                (safetyInstructionData as AxiosResponse)?.data?.map(
+                  (item: SafetyInstructionInterface) => ({
+                    name: item.reagent_name + " - " + item.name,
+                    shortName: item.name,
+                    value: item.id,
+                  }),
+                ) || []
+              }
+            />
+          )}
+        />
+        <PrivateComponent
+          roles={ANY_ROLE_LIST}
+          component={() => (
+            <NewItemPopup
+              formComponent={(setOpen) => (
+                <AddSafetyInstruction
+                  setOpen={setOpen}
+                  refetch={precautionaryStatementRefetch}
+                />
+              )}
+            />
+          )}
+        />
+      </Box>
+
       <Controller
         control={control}
         name="cas_no"
