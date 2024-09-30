@@ -9,6 +9,7 @@ interface NewItemButtonProps {
   href?: string;
   onClick?: () => void;
   roles?: string[] | null;
+  margin?: string;
 }
 
 function NewItemButton(props: NewItemButtonProps) {
@@ -27,7 +28,7 @@ function NewItemButton(props: NewItemButtonProps) {
           maxHeight: "35px",
           minWidth: "35px",
           minHeight: "35px",
-          margin: "auto",
+          margin: props.margin || "auto",
           borderRadius: "30px",
         }}
       >

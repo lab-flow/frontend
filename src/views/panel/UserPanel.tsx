@@ -34,6 +34,8 @@ import { ADMIN_ROLE, ROLE } from "../../api/enums/userRoles";
 import ReagentRequestsMe from "../reagents/requests/ReagentRequestsMe";
 import ReagentsGrid from "../reagents/general/ReagentsGrid";
 import Laboratories from "../laboratory/Laboratories.tsx";
+import SafetyDataSheets from "../safety-data-sheet/SafetyDataSheets.tsx";
+import SafetyInstruction from "../safety-instruction/SafetyInstruction.tsx";
 
 function UserPanel() {
   const { currentUserRoles } = authenticationService;
@@ -78,6 +80,21 @@ function UserPanel() {
         id: "reagents-passing",
         icon: <SwapHorizIcon />,
         component: <ReagentRequestsMe />,
+        visible: true,
+      },
+      {
+        name: Names.safety_data_sheets,
+        id: DataProviders.SAFETY_DATA_SHEETS.endpoint,
+        icon: <TextIcon text="SDS" />,
+        component: <SafetyDataSheets history={false} />,
+        visible: true,
+        dividerBefore: true,
+      },
+      {
+        name: Names.safety_instructions,
+        id: DataProviders.SAFETY_INSTRUCTIONS.endpoint,
+        icon: <TextIcon text="IB" />,
+        component: <SafetyInstruction history={false} />,
         visible: true,
       },
       {

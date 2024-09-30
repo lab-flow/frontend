@@ -35,10 +35,14 @@ export interface ReagentInterface {
   name: string;
   catalog_no: string;
   volume: number;
-  safety_data_sheet: string;
-  safety_instruction: string;
-  safety_instruction_name: string;
-  safety_data_sheet_name: string;
+  safety_data_sheet: {
+    id: number;
+    repr: string;
+  };
+  safety_instruction: {
+    id: number;
+    repr: string;
+  };
   cas_no: string;
   other_info: string;
   kit_contents: string;
@@ -58,10 +62,8 @@ export interface ReagentFormInterface {
   name: string;
   catalog_no: string;
   volume: number;
-  safety_data_sheet?: string;
-  safety_instruction?: string;
-  safety_instruction_name: string;
-  safety_data_sheet_name: string;
+  safety_data_sheet?: number;
+  safety_instruction?: number;
   cas_no: string;
   other_info: string;
   kit_contents: string;

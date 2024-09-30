@@ -44,7 +44,7 @@ function FewCriticalNotifications(props: { style?: React.CSSProperties }) {
               <NotificationListItem
                 key={item.reagent_id.toString()}
                 onClick={() => {
-                  navigate("/personal-reagents/" + item.reagent_id);
+                  navigate("/reagents/" + item.reagent_id);
                 }}
                 content={
                   <ListItem key={item.reagent_id}>

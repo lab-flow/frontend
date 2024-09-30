@@ -39,6 +39,9 @@ function DropdownSingle(props: DropdownProps<string | undefined>) {
         MenuProps={{
           style: { maxHeight: "400px" },
         }}
+        style={props.style}
+        sx={props.sx}
+        size={props.size}
       >
         <MenuItem key={`emptyValue`} value={""}>
           <span style={{ margin: "auto 0" }}></span>

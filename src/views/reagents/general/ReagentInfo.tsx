@@ -12,6 +12,7 @@ function ReagentInfo() {
     isFetching,
     isLoading,
   } = useQuery("getReagent", () => DataProviders.REAGENTS.getItem(Number(id)));
+  
 
   return ReagentGeneralInfo(reagent?.data, isLoading || isFetching);
 }

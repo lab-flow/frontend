@@ -157,7 +157,7 @@ function PersonalReagentForm(props: AddPersonalReagentFormProps) {
             />
           )}
         />
-        <NewItemButton href={`/${DataProviders.REAGENTS.endpoint}/new`} />
+        <NewItemButton href={`/${DataProviders.REAGENTS.endpoint}/new`} margin="-15px 5px"/>
       </Box>
       {reagent && reagentView(reagent as unknown as number)}
     </>
@@ -264,6 +264,18 @@ function PersonalReagentForm(props: AddPersonalReagentFormProps) {
         />
         <Controller
           control={control}
+          name="opening_date"
+          render={({ field }) => (
+            <div>
+              <CustomDatePicker
+                label={Names.opening_date}
+                {...field}
+              />
+            </div>
+          )}
+        />
+        <Controller
+          control={control}
           name="expiration_date"
           render={({ field }) => (
             <CustomDatePicker label="Data ważności" required {...field} />
@@ -277,6 +289,7 @@ function PersonalReagentForm(props: AddPersonalReagentFormProps) {
           <Dropdown
             label={Names.laboratory}
             value={laboratory}
+            required
             onChange={(e) => {
               setLaboratory(e.target.value);
               field.onChange(e);

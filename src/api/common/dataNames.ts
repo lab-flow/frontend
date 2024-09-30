@@ -40,7 +40,7 @@ export const Names = {
   object_id: "ID Obiektu",
   object_repr: "Object Repr",
   ok: "Ok",
-  opening_and_check_date: "Data otwarcia",
+  opening_date: "Data otwarcia",
   password: "Hasło",
   password_confirm: "Potwierdź hasło",
   preview: "podgląd",
@@ -56,7 +56,9 @@ export const Names = {
   requester_comment: "Komentarz zgłaszającego",
   room: "Pokój",
   safety_data_sheet: "Karta charakterystyki",
+  safety_data_sheets: "Karty charakterystyki",
   safety_instruction: "Instrukcja bezpieczeństwa",
+  safety_instructions: "Instrukcje bezpieczeństwa",
   send: "Wyślij",
   storing_temperature: "Temperatura przechowywania",
   supervisor: "Kierownik",
@@ -245,7 +247,7 @@ export const Names = {
   authors: "Autorzy",
   last_login: "Ostatnio zalogowany",
   is_usage_record_required_tooltip:
-    "Odczynnik musi posiadać kartę rozchodu, gdy: \n 1. Posiada kody H, które wymagają karty rozchodu, \n 2. Jest metanolem lub zawiera metanol (preparaty o stężeniach metanolu wyższych niż 3 %)",
+    "Odczynnik musi posiadać kartę rozchodu, gdy: \n 1. Posiada kody H, które wymagają karty rozchodu, \n 2. Jest metanolem lub zawiera metanol (preparaty o stężeniach metanolu wyższych niż 3 %) \n\n Wymaganie karty rozchodu może zostać wyłączone przez administratora z pominięciem powyższych warunków.",
   ghs_hazard_statements: "Piktogramy GHS",
   generate_usage_record_for_reagents:
     "Wygeneruj kartę rozchodu dla odczynników",

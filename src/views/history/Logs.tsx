@@ -24,6 +24,8 @@ import Pictograms from "../pictograms/Pictograms";
 import Concentrations from "../concentrations/Concentrations";
 import ProjectProcedures from "../project-procedures/ProjectProcedures";
 import Laboratories from "../laboratory/Laboratories";
+import SafetyDataSheets from "../safety-data-sheet/SafetyDataSheets";
+import SafetyInstruction from "../safety-instruction/SafetyInstruction";
 
 function Logs() {
   const [expanded, setExpanded] = useState<string>();
@@ -38,6 +40,8 @@ function Logs() {
       history: true,
       logsPage: true,
     }),
+    safety_data_sheets: SafetyDataSheets({ history: true, logsPage: true }),
+    safety_instructions: SafetyInstruction({ history: true, logsPage: true }),
     producers: Producers({ history: true, logsPage: true }),
     users: UsersList({ history: true, logsPage: true }),
     units: Units({ history: true, logsPage: true }),

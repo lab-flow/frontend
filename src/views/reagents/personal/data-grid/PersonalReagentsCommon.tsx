@@ -60,6 +60,7 @@ interface PersonalReagentsCommonProps {
     is_usage_record_generated: boolean;
     lot_no: boolean;
     receipt_purchase_date: boolean;
+    opening_date: boolean;
     expiration_date: boolean;
     disposal_utilization_date: boolean;
     laboratory: boolean;
@@ -89,6 +90,7 @@ interface PersonalReagentsCommonProps {
     is_critical: boolean;
     user: boolean;
     expiration_date: boolean;
+    opening_date: boolean;
     receipt_purchase_date: boolean;
     reagent: boolean;
     producer: boolean;
@@ -496,6 +498,13 @@ function PersonalReagentsCommon(props: PersonalReagentsCommonProps) {
     {
       field: "receipt_purchase_date",
       headerName: Names.receipt_purchase_date,
+      width: 125,
+      renderCell: renderCellExpand,
+      sortable: true,
+    },
+    {
+      field: "opening_date",
+      headerName: Names.opening_date,
       width: 125,
       renderCell: renderCellExpand,
       sortable: true,

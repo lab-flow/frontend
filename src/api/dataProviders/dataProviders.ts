@@ -22,9 +22,15 @@ export const deleteReagentRequest = async (data: { id: number }) => {
 };
 
 export const getSafetyInstruction = async (id: number) => {
-  const response = await get(`reagents/${id}/safety-instructions/`);
+  const response = await get(`safety-instructions/${id}/`);
   return response.data;
 };
+
+export const getSafetyDataSheet = async (id: number) => {
+  const response = await get(`safety-data-sheets/${id}/`);
+  return response.data;
+};
+
 
 export const getUsageRecord = async (id: number) => {
   return await getFile(`/personal-reagents/${id}/usage-record/`);

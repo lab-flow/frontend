@@ -25,6 +25,7 @@ import CustomDialog from "../../../components/basic/CustomDialog";
 import { ReagentInterface } from "../../../api/interfaces/reagent.ts";
 import { GridValidRowModel } from "@mui/x-data-grid/models/gridRows";
 import { GridColDef } from "@mui/x-data-grid";
+import { getSafetyDataSheet, getSafetyInstruction } from "../../../api/dataProviders/dataProviders.ts";
 
 const ReagentsGrid = (props: { history: boolean; logsPage?: boolean }) => {
   const navigate = useNavigate();
@@ -254,53 +255,47 @@ const ReagentsGrid = (props: { history: boolean; logsPage?: boolean }) => {
       sortable: false,
     },
     {
-      field: "safety_data_sheet_name",
-      headerName: Names.safety_data_sheet_name,
-      width: 140,
-      align: "left",
-      sortable: true,
-    },
-    {
       field: "safety_data_sheet",
       headerName: Names.safety_data_sheet,
-      width: 180,
+      width: 220,
       sortable: false,
       align: "center",
       renderCell: (params: { row: ReagentInterface }) => (
-        <a
-          href={params.row.safety_data_sheet}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Tooltip title={`${Names.safety_data_sheet} - ${Names.preview}`}>
-            <VisibilityIcon style={{ color: theme.palette.info.main }} />
-          </Tooltip>
-        </a>
+        <>
+        {params.row.safety_data_sheet?.repr}
+        <Tooltip title={`${Names.safety_data_sheet} - ${Names.preview}`}
+          onClick={async () => {
+            window.open(
+              (await getSafetyDataSheet(params.row.safety_data_sheet?.id)).safety_data_sheet,
+              "_blank",
+            );
+          }}>
+            <VisibilityIcon style={{ color: theme.palette.info.main, marginLeft: "10px" }} />
+          </Tooltip>    
+        </>
       ),
-    },
-    {
-      field: "safety_instruction_name",
-      headerName: Names.safety_instruction_name,
-      width: 180,
-      align: "left",
-      sortable: true,
     },
     {
       field: "safety_instruction",
       headerName: Names.safety_instruction,
-      width: 130,
+      width: 220,
       sortable: false,
       align: "center",
       renderCell: (params: { row: ReagentInterface }) => (
-        <a
-          href={params.row.safety_instruction}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Tooltip title={`${Names.safety_instruction} - ${Names.preview}`}>
-            <VisibilityIcon style={{ color: theme.palette.info.main }} />
-          </Tooltip>
-        </a>
+        <>
+        {params.row.safety_instruction?.repr}
+        <Tooltip title={`${Names.safety_instruction} - ${Names.preview}`}
+        onClick={async () => {
+          window.open(
+            (await getSafetyInstruction
+              (params.row.safety_instruction?.id)).safety_instruction
+              ,
+            "_blank",
+          );
+        }}>
+          <VisibilityIcon style={{ color: theme.palette.info.main, marginLeft: "10px"  }} />
+        </Tooltip>
+        </>
       ),
     },
     {

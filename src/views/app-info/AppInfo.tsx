@@ -22,7 +22,7 @@ function AppInfo() {
           </Grid>
           <Grid item>
           <Typography>
-              <p>LabFlow 1.0.0</p>
+              <p>LabFlow 1.0.1</p>
               <p>MIT License</p>
               <p>Copyright &copy; 2024 LabFlow</p>
             </Typography>

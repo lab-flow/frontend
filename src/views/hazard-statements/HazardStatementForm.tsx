@@ -79,7 +79,6 @@ function HazardStatementForm(props: HazardStatementFormProps) {
             name="clp_classification"
             render={({ field }) => (
               <Dropdown
-                required
                 label={Names.clp_classification}
                 value={clpClassification}
                 onChange={(e) => {

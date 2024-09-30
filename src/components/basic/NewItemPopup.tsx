@@ -23,7 +23,7 @@ function NewItemPopup(props: NewItemPopupProps) {
             maxHeight: "35px",
             minWidth: "35px",
             minHeight: "35px",
-            margin: "auto",
+            margin: "6px 5px",
             borderRadius: "30px",
           }}
         >

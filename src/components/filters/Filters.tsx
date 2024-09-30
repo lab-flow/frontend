@@ -324,15 +324,14 @@ export function DateFilter(props: FilterProps) {
         sx={{
           textAlign: "center",
           alignSelf: "center",
-          padding: "0 10px",
         }}
       >
         {Names[props.field_name as keyof typeof Names]}
       </Typography>
       <Dropdown
         size="small"
-        width="70px"
-        style={{ top: "7px" }}
+        width="75px"
+        sx={{ boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 }}}
         label={Names.sign}
         value={sign}
         onChange={(e) => {
@@ -356,6 +355,7 @@ export function DateFilter(props: FilterProps) {
         size="small"
         width="140px"
         style={{ top: "7px" }}
+         sx={{ boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}
         required={!!props.required}
         onChange={(e: { target: { value: SetStateAction<string> } }) => {
           const currentSign = getFieldNameBySign(sign, props.field_name);

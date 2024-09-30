@@ -27,7 +27,7 @@ export interface PersonalReagent {
   username: string;
   lot_no: string;
   admission_date: string;
-  opening_and_check_date: string;
+  opening_date: string;
   expiration_date: string;
   is_usage_record_generated: boolean;
   laboratory: string;

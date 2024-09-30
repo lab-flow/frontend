@@ -1,5 +1,5 @@
 import DashboardCard from "../../../components/basic/DashboardCard.tsx";
-import { Box, Grid, Link, Typography } from "@mui/material";
+import { Box, Grid, Link, Tooltip, Typography } from "@mui/material";
 import { Names } from "../../../api/common/dataNames.ts";
 import {
   CustomCloseIcon,
@@ -8,6 +8,7 @@ import {
 import CustomReagentTooltip from "../../../components/basic/HtmlTooltip";
 import { DataProviders } from "../../../api/dataProviders/DataProvider.ts";
 import { ReagentInterface } from "../../../api/interfaces/reagent.ts";
+import { getSafetyDataSheet, getSafetyInstruction } from "../../../api/dataProviders/dataProviders.ts";
 
 function ReagentGeneralInfo(
   reagent: ReagentInterface,
@@ -82,22 +83,28 @@ function ReagentGeneralInfo(
         )}
       </Grid>
       <Typography variant="body2" gutterBottom component="div">
-        <b>{Names.safety_data_sheet_name}: </b>{" "}
-        {reagent.safety_data_sheet_name || "-"}
-      </Typography>
-      <Typography variant="body2" gutterBottom component="div">
         <b>{Names.safety_data_sheet}: </b>{" "}
-        <Link href={reagent.safety_data_sheet} target="_blank">
+        <Link onClick={async () => {
+            window.open(
+              (await getSafetyDataSheet(reagent.safety_data_sheet?.id)).safety_data_sheet,
+              "_blank",
+            );
+          }} target="_blank">
+                {reagent.safety_data_sheet?.repr}
+                {" "}
           {Names.preview}
         </Link>
       </Typography>
       <Typography variant="body2" gutterBottom component="div">
-        <b>{Names.safety_instruction_name}: </b>{" "}
-        {reagent.safety_instruction_name || "-"}
-      </Typography>
-      <Typography variant="body2" gutterBottom component="div">
         <b>{Names.safety_instruction}: </b>{" "}
-        <Link href={reagent.safety_instruction} target="_blank">
+        <Link onClick={async () => {
+            window.open(
+              (await getSafetyInstruction(reagent.safety_instruction?.id)).safety_instruction,
+              "_blank",
+            );
+          }} target="_blank">
+                {reagent.safety_instruction?.repr}
+                {" "}
           {Names.preview}
         </Link>
       </Typography>
